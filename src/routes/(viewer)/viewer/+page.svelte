@@ -1,5 +1,5 @@
 <script lang="ts">
-	import abcjs from 'abcjs';
+	import abcjs, { type AbcVisualParams } from 'abcjs';
 	import { onMount } from 'svelte';
 	import { tap } from 'svelte-gestures';
 
@@ -16,11 +16,13 @@ L: 1/4
 K: perc
 F c F c
 `;
-		abcjs.renderAbc('paper', abc);
+
+		const visualOptions: AbcVisualParams = { responsive: 'resize' };
+		abcjs.renderAbc('paper', abc, visualOptions);
 	}
 
 	function onTap(event: Event) {
-		console.log('tapped!')
+		console.log('tapped!');
 	}
 </script>
 
