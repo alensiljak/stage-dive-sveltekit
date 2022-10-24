@@ -10,9 +10,9 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			fallback: 'app.html'
+			fallback: 'index.html'
 		}),
-		prerender: {entries: []}
+		//prerender: {entries: []}
 	}
 };
 
