@@ -2,7 +2,13 @@
 	import '@picocss/pico/css/pico.css';
 </script>
 
-<header>This is the layout</header>
+<header>Stage Dive</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/viewer">Viewer</a>
+    <a href="/settings">Settings</a>
+  </nav>
 
 <main class="container">
 	<slot />
