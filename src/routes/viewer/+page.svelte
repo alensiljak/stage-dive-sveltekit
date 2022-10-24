@@ -1,6 +1,7 @@
 <script lang="ts">
 	import abcjs from 'abcjs';
 	import { onMount } from 'svelte';
+	import { tap } from 'svelte-gestures';
 
 	onMount(() => {
 		createSheet();
@@ -17,6 +18,17 @@ F c F c
 `;
 		abcjs.renderAbc('paper', abc);
 	}
+
+	function onTap(event: Event) {
+		console.log('tapped!')
+	}
 </script>
 
-<div id="paper" />
+<div id="paper" use:tap={{ timeframe: 300 }} on:tap={onTap} />
+
+<style lang="css">
+	#paper {
+		height: 100vh;
+		background-color: beige;
+	}
+</style>
