@@ -4,6 +4,8 @@
 	import { tap } from 'svelte-gestures';
 	import { goto } from '$app/navigation';
 
+	let open = false
+
 	onMount(() => {
 		createSheet();
 	});
@@ -22,23 +24,28 @@ F c F c
 		abcjs.renderAbc('paper', abc, visualOptions);
 	}
 
+	function goHome() {
+		// just go back, replace history
+		goto(`/`, { replaceState: true })
+	}
+
 	function onTap(event: Event) {
-		//console.log('tapped!');
 		// Open dialog
 		// add "open" attribute to the dialog
-		//alert('yo!')
+		open = true
+	}
 
-		// just go back, for now
-		goto(`/`, { replaceState: true }) 
+	function closeDialog() {
+		open = false
 	}
 </script>
 
 <div id="paper" use:tap={{ timeframe: 300 }} on:tap={onTap} />
 
-<dialog>
+<dialog {open}>
 	<article>
 	  <header>
-		<a href="#close" aria-label="Close" class="close"></a>
+		<a href="#close" aria-label="Close" class="close" on:click={closeDialog}> </a>
 		Modal title
 	  </header>
 	  <p>
@@ -48,8 +55,8 @@ F c F c
 		Praesent vehicula lacus ac justo accumsan ullamcorper.
 	  </p>
 	  <footer>
-		<a href="#cancel" role="button" class="secondary">Cancel</a>
-		<a href="#confirm" role="button">Confirm</a>
+		<a href="#cancel" role="button" class="secondary" on:click={closeDialog}>Cancel</a>
+		<a href="#confirm" role="button" on:click={goHome}>Confirm</a>
 	  </footer>
 	</article>
   </dialog>
