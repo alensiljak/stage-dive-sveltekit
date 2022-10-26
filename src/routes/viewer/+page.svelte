@@ -56,7 +56,7 @@ F c F c
 <dialog {open}>
 	<article>
 		<header>
-			<a href="#close" aria-label="Close" class="close" on:click={closeDialog} />
+			<a href="#close" aria-label="Close" class="close" on:click={closeDialog}>&nbsp;</a>
 			Modal title
 		</header>
 		<p>
