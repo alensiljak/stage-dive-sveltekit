@@ -33,6 +33,8 @@ F c F c
 		// Open dialog
 		// add "open" attribute to the dialog
 		open = true
+
+		
 	}
 
 	function closeDialog() {
@@ -61,7 +63,7 @@ F c F c
 	</article>
   </dialog>
 
-<style lang="css">
+<style lang="scss">
 	#paper {
 		height: 100vh;
 		background-color: beige;
