@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '@picocss/pico/css/pico.css';
 	import { Star } from 'lucide-svelte';
-	import { toolbarVisible } from '../../storage/store';
+	import { toolbarVisible } from '../storage/store';
 
 	let visible = true;
 

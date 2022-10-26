@@ -3,7 +3,9 @@
 	import { onMount } from 'svelte';
 	import { tap } from 'svelte-gestures';
 	import { goto } from '$app/navigation';
+    import {toolbarVisible} from '../../storage/store'
 
+    toolbarVisible.set(false)
 	let open = false
 
 	onMount(() => {
@@ -32,9 +34,9 @@ F c F c
 	function onTap(event: Event) {
 		// Open dialog
 		// add "open" attribute to the dialog
-		open = true
+		// open = true
 
-		
+		toolbarVisible.update(value => !value)
 	}
 
 	function closeDialog() {

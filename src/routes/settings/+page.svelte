@@ -1,8 +1,8 @@
 <script lang="ts">
-    import {toolbarVisible} from '../../../storage/store'
+    // import {toolbarVisible} from '../../storage/store'
 
     // let toolbarVisible = false
-    toolbarVisible.set(false)
+    // toolbarVisible.set(false)
 </script>
 
 <div>
