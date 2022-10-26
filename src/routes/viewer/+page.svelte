@@ -3,10 +3,12 @@
 	import { onMount } from 'svelte';
 	import { tap } from 'svelte-gestures';
 	import { goto } from '$app/navigation';
-    import {toolbarVisible} from '../../storage/store'
+	import { toolbarVisible } from '../../storage/store';
+	import {notifications} from '../../lib/notifications'
+	import Toast from '../../components/Toast.svelte'
 
-    toolbarVisible.set(false)
-	let open = false
+	toolbarVisible.set(false);
+	let open = false;
 
 	onMount(() => {
 		createSheet();
@@ -28,7 +30,7 @@ F c F c
 
 	function goHome() {
 		// just go back, replace history
-		goto(`/`, { replaceState: true })
+		goto(`/`, { replaceState: true });
 	}
 
 	function onTap(event: Event) {
@@ -36,34 +38,38 @@ F c F c
 		// add "open" attribute to the dialog
 		// open = true
 
-		toolbarVisible.update(value => !value)
+		toolbarVisible.update((value) => !value);
 	}
 
 	function closeDialog() {
-		open = false
+		open = false;
+	}
+
+	function onSwipe(event: CustomEvent) {
+		console.log('swipe:', event);
+		notifications.info('swiped', 350)
 	}
 </script>
 
-<div id="paper" use:tap={{ timeframe: 300 }} on:tap={onTap} />
+<div id="paper" use:tap={{ timeframe: 300 }} on:tap={onTap} on:swipe={onSwipe} />
 
 <dialog {open}>
 	<article>
-	  <header>
-		<a href="#close" aria-label="Close" class="close" on:click={closeDialog}> </a>
-		Modal title
-	  </header>
-	  <p>
-		Nunc nec ligula a tortor sollicitudin dictum in vel enim. 
-		Quisque facilisis turpis vel eros dictum aliquam et nec turpis. 
-		Sed eleifend a dui nec ullamcorper. 
-		Praesent vehicula lacus ac justo accumsan ullamcorper.
-	  </p>
-	  <footer>
-		<a href="#cancel" role="button" class="secondary" on:click={closeDialog}>Cancel</a>
-		<a href="#confirm" role="button" on:click={goHome}>Confirm</a>
-	  </footer>
+		<header>
+			<a href="#close" aria-label="Close" class="close" on:click={closeDialog} />
+			Modal title
+		</header>
+		<p>
+			Nunc nec ligula a tortor sollicitudin dictum in vel enim. Quisque facilisis turpis vel eros
+			dictum aliquam et nec turpis. Sed eleifend a dui nec ullamcorper. Praesent vehicula lacus ac
+			justo accumsan ullamcorper.
+		</p>
+		<footer>
+			<a href="#cancel" role="button" class="secondary" on:click={closeDialog}>Cancel</a>
+			<a href="#confirm" role="button" on:click={goHome}>Confirm</a>
+		</footer>
 	</article>
-  </dialog>
+</dialog>
 
 <style lang="scss">
 	#paper {

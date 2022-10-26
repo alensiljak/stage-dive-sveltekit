@@ -18,6 +18,7 @@
 		</ul>
 		<ul>
 			<li><a class="secondary" href="/">Home</a></li>
+			<li><a class="secondary" href="/library">Library</a></li>
 			<li><a class="secondary" href="/viewer">Viewer</a></li>
 			<li><a class="secondary" href="/settings">Settings</a></li>
 		</ul>
