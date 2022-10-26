@@ -1,11 +1,11 @@
 <script lang="ts">
 	import abcjs, { type AbcVisualParams } from 'abcjs';
 	import { onMount } from 'svelte';
-	import { tap } from 'svelte-gestures';
+	import { tap, swipe } from 'svelte-gestures';
 	import { goto } from '$app/navigation';
 	import { toolbarVisible } from '../../storage/store';
-	import {notifications} from '../../lib/notifications'
-	import Toast from '../../components/Toast.svelte'
+	import { notifications } from '../../lib/notifications';
+	import Toast from '../../components/Toast.svelte';
 
 	toolbarVisible.set(false);
 	let open = false;
@@ -34,11 +34,14 @@ F c F c
 	}
 
 	function onTap(event: Event) {
+		console.log('tap');
+
 		// Open dialog
 		// add "open" attribute to the dialog
 		// open = true
 
 		toolbarVisible.update((value) => !value);
+		//notifications.success('yo!', 5000)
 	}
 
 	function closeDialog() {
@@ -46,12 +49,20 @@ F c F c
 	}
 
 	function onSwipe(event: CustomEvent) {
-		console.log('swipe:', event);
-		notifications.info('swiped', 350)
+		console.log('swipe:');
+
+		// notifications.info('swiped', 350)
+		toolbarVisible.set(true);
 	}
 </script>
 
-<div id="paper" use:tap={{ timeframe: 300 }} on:tap={onTap} on:swipe={onSwipe} />
+<div
+	id="container"
+	use:tap={{ timeframe: 300 }} on:tap={onTap}
+	use:swipe={{ touchAction: 'pan-y' }} on:swipe={onSwipe}
+>
+	<div id="paper" />
+</div>
 
 <dialog {open}>
 	<article>
@@ -72,8 +83,12 @@ F c F c
 </dialog>
 
 <style lang="scss">
-	#paper {
+	#container {
 		height: 100vh;
 		background-color: beige;
+	}
+	#paper {
+		//height: 100%;
+		background-color: darkred;
 	}
 </style>
